@@ -1,0 +1,21 @@
+Test Environment:
+platform: 
+Intel(R) Core(TM) i3-5005U CPU @ 2.00GHz
+RAM: 2G
+Operating System: Debian derivative
+Linux kernel version: 4.4.0-21-generic
+gcc version: 5.4.0 20160609
+
+Test Coverage:
+1. Function test, insmod, rmmod, open the device, read, ioctl.
+Verify the device and the CLI output.
+
+2. Concurrency test I
+2.1 load the driver, run test_ioctl to set the char, run test_read to verify the result.
+2.2 run test_ioctl to modify the char, the test_read output CLI continuously output the changed char by ioctl.
+
+3 Concurrency test II
+Similar with 2, but introduce multiple test_read instances, then change the char by test_ioctl,
+all the test_read CLI windows update the output at the same time.
+
+

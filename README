@@ -1,0 +1,11 @@
+This directory includes the source code of datto_char_driver and the unit test code.
+
+Type "make" to build the driver.
+In "test" directory, type "make" to build the unit test applications,
+"test_read" and "test_ioctl" will be generated.
+
+Multiple instances of the user-space test applications are allowed, due to the driver's concurrency handling.
+
+Other documents:
+"unit_test_example.txt" describes a basic functional test example.
+"unit_test_coverage.txt" describes the test coverage includes concurrency test.

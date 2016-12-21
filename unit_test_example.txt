@@ -1,0 +1,49 @@
+ $ sudo insmod datto_char_drv.ko 
+ $ ls /dev/
+autofs           dvd        log               net                 ram14   sda1      tty10  tty24  tty38  tty51  tty8       ttyS2   ttyS5      vcs4         vhost-net
+block            ecryptfs   loop0             network_latency     ram15   sda2      tty11  tty25  tty39  tty52  tty9       ttyS20  ttyS6      vcs5         zero
+bsg              fb0        loop1             network_throughput  ram2    sda5      tty12  tty26  tty4   tty53  ttyprintk  ttyS21  ttyS7      vcs6
+btrfs-control    fd         loop2             null                ram3    sg0       tty13  tty27  tty40  tty54  ttyS0      ttyS22  ttyS8      vcs7
+bus              full       loop3             port                ram4    sg1       tty14  tty28  tty41  tty55  ttyS1      ttyS23  ttyS9      vcsa
+cdrom            fuse       loop4             ppp                 ram5    shm       tty15  tty29  tty42  tty56  ttyS10     ttyS24  uhid       vcsa1
+char             hidraw0    loop5             psaux               ram6    snapshot  tty16  tty3   tty43  tty57  ttyS11     ttyS25  uinput     vcsa2
+console          hpet       loop6             ptmx                ram7    snd       tty17  tty30  tty44  tty58  ttyS12     ttyS26  urandom    vcsa3
+core             hugepages  loop7             pts                 ram8    sr0       tty18  tty31  tty45  tty59  ttyS13     ttyS27  userio     vcsa4
+cpu              hwrng      loop-control      ram0                ram9    stderr    tty19  tty32  tty46  tty6   ttyS14     ttyS28  vboxguest  vcsa5
+cpu_dma_latency  i2c-0      mapper            ram1                random  stdin     tty2   tty33  tty47  tty60  ttyS15     ttyS29  vboxuser   vcsa6
+cuse             initctl    mcelog            ram10               rfkill  stdout    tty20  tty34  tty48  tty61  ttyS16     ttyS3   vcs        vcsa7
+datto_char       input      mem               ram11               rtc     tty       tty21  tty35  tty49  tty62  ttyS17     ttyS30  vcs1       vfio
+disk             kmsg       memory_bandwidth  ram12               rtc0    tty0      tty22  tty36  tty5   tty63  ttyS18     ttyS31  vcs2       vga_arbiter
+dri              lightnvm   mqueue            ram13               sda     tty1      tty23  tty37  tty50  tty7   ttyS19     ttyS4   vcs3       vhci
+
+ $ ./test_read 
+Device open error, make sure the datto_char device exists, the user has enough priviledge and try sudo
+
+ $ sudo ./test_read 
+run test_ioctl to set the char to the driver
+
+ $ sudo ./test_ioctl 
+Please type the char for ioctl and press ENTER:
+$
+ioctl complete
+
+ $ sudo ./test_read 
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+ $ sudo rmmod datto_char_drv 
+
+
+ $ dmesg | tail -n 15
+...
+[ 4432.304252] datto char device major number 240
+[ 4432.306047] datto char_drv_init complete result 0
+[ 4571.614543] datto char open count: 1
+[ 4571.614914] datto char open count after release : 0
+[ 4582.481396] datto char open count: 1
+[ 4584.660194] datto ioctl arg 36
+[ 4584.660196] datto ioctl set value $
+[ 4584.660206] datto char open count after release : 0
+[ 4631.545822] datto char open count: 1
+[ 4632.252676] datto char open count after release : 0
+[ 4691.246949] datto char_drv_exit
+
